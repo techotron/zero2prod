@@ -4,8 +4,8 @@ use actix_web::{web, HttpResponse};
 //  In our case, it'll parse the definition of the FormData type and generate the right implementation for it
 #[derive(serde::Deserialize)]
 pub struct FormData {
-    email: String,
-    name: String
+    pub email: String,
+    pub name: String
 }
 
 pub async fn subscribe(_form: web::Form<FormData>) -> HttpResponse {

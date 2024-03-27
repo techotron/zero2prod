@@ -59,7 +59,7 @@ async fn subscribe_returns_400_when_data_is_missing() {
     let test_cases = vec![
         ("name=le%20guin", "missing the email"),
         ("email=ursula_le_guin%40gmail.com", "missing the name"),
-        ("", "missing both email and name")
+        ("", "missing both email and name"),
     ];
 
     for (invalid_body, error_message) in test_cases {
@@ -82,7 +82,6 @@ async fn subscribe_returns_400_when_data_is_missing() {
         );
     }
 }
-
 
 // No .await call, therefore no need for `spawn_app` to be async now.
 // We are also running tests, so it is not worth it to propagate errors:

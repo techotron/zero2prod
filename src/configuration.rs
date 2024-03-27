@@ -25,3 +25,12 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
     // Try to convert the configuration values it read into our settings type
     settings.try_deserialize()
 }
+
+impl DatabaseSettings {
+    pub fn connection_string(&self) -> String {
+        format!(
+            "postgres://{}:{}@{}:{}/{}",
+            self.username, self.password, self.host, self.port, self.database_name
+        )
+    }
+}

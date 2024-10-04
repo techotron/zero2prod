@@ -22,6 +22,7 @@ Run Tests:
 ```bash
 scripts/init_db.sh
 cargo test
+# TEST_LOG=true cargo test # to see the log output from the tests
 docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
 ```
 

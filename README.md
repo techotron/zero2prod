@@ -34,6 +34,11 @@ curl -X POST "http://localhost:8000/subscriptions" \
     --data-urlencode "name=eddy"
 ```
 
+Linting
+```bash
+cargo clippy -- -D warnings
+cargo fmt --all
+```
 
 Remove unused dependencies:
 

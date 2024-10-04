@@ -1,8 +1,8 @@
 use actix_web::{web, HttpResponse};
-use sqlx::PgPool;
-use uuid::Uuid;
 use chrono::Utc;
+use sqlx::PgPool;
 use tracing;
+use uuid::Uuid;
 
 // This macro automatically implements the correct serialise/deserialise implementation for us
 //  In our case, it'll parse the definition of the FormData type and generate the right implementation for it
@@ -25,10 +25,9 @@ pub async fn subscribe(
     // Retrieving a pool from the application state!
     pool: web::Data<PgPool>,
 ) -> HttpResponse {
-    match insert_subscriber(&pool, &form).await
-    {
+    match insert_subscriber(&pool, &form).await {
         Ok(_) => HttpResponse::Ok().finish(),
-        Err(_) => HttpResponse::InternalServerError().finish()
+        Err(_) => HttpResponse::InternalServerError().finish(),
     }
 }
 
@@ -36,10 +35,7 @@ pub async fn subscribe(
     name = "Saving new subscriber details in the database",
     skip(form, pool)
 )]
-pub async fn insert_subscriber(
-    pool: &PgPool,
-    form: &FormData,
-) -> Result<(), sqlx::Error> {
+pub async fn insert_subscriber(pool: &PgPool, form: &FormData) -> Result<(), sqlx::Error> {
     sqlx::query!(
         r#"
         INSERT INTO subscriptions (id, email, name, subscribed_at)
@@ -50,12 +46,12 @@ pub async fn insert_subscriber(
         form.name,
         Utc::now()
     )
-        .execute(pool)
-        .await
-        .map_err(|e| {
-            tracing::error!("Failed to execute query: {:?}", e);
-            e
+    .execute(pool)
+    .await
+    .map_err(|e| {
+        tracing::error!("Failed to execute query: {:?}", e);
+        e
         // Using the `?` operator to return early if the function failed, returning a sqlx::Error
-        })?;
-        Ok(())
+    })?;
+    Ok(())
 }

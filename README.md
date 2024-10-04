@@ -63,3 +63,5 @@ Prepare build with sqlx offline
 ```bash
 SQLX_OFFLINE=true cargo prepare -- --bin zero2prod
 ```
+
+**Note**: Need to install sqlx-cli: `cargo install sqlx-cli`

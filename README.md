@@ -53,3 +53,8 @@ unused dependencies:
 └─── dependencies
      └─── "env_logger"
 ```
+
+Connect to the DB
+```bash
+psql -h localhost -p 5432 -U postgres -d newsletter
+```

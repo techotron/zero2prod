@@ -58,3 +58,8 @@ Connect to the DB
 ```bash
 psql -h localhost -p 5432 -U postgres -d newsletter
 ```
+
+Prepare build with sqlx offline
+```bash
+SQLX_OFFLINE=true cargo prepare -- --bin zero2prod
+```
